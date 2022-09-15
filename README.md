@@ -1,21 +1,23 @@
-# vue_shop
+# clwy_shop
 
-## Project setup
+## 长乐未央商城vue后台
+
+## 项目安装yarn源
 ```
 yarn install
 ```
 
-### Compiles and hot-reloads for development
+### 项目启动
 ```
 yarn serve
 ```
 
-### Compiles and minifies for production
+### 项目打包
 ```
 yarn build
 ```
 
-### Lints and fixes files
+### 项目lint代码格式化
 ```
 yarn lint
 ```
