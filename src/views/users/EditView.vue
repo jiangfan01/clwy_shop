@@ -1,17 +1,17 @@
 <template>
   <div>
     <el-form
-      :model="user"
+      :model="ruleForm"
       :rules="rules"
       ref="ruleForm"
       label-width="100px"
       class="demo-ruleForm"
     >
       <el-form-item label="用户名" prop="username">
-        <el-input v-model="user.username"></el-input>
+        <el-input v-model="ruleForm.username"></el-input>
       </el-form-item>
       <el-form-item label="原始密码" prop="oldPassword">
-        <el-input v-model="user.oldPassword"></el-input>
+        <el-input v-model="ruleForm.oldPassword"></el-input>
       </el-form-item>
       <el-form
         :model="ruleForm"
@@ -44,8 +44,10 @@
           </el-switch
         ></el-form-item>
         <el-form-item label="性别">
-          <el-radio v-model="ruleForm.sex" label="1">男</el-radio>
-          <el-radio v-model="ruleForm.sex" label="0">女</el-radio>
+          <el-radio-group v-model="ruleForm.sex">
+            <el-radio :label="1">男</el-radio>
+            <el-radio :label="0">女</el-radio>
+          </el-radio-group>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="submitForm('ruleForm')"
@@ -82,13 +84,12 @@ export default {
       }
     };
     return {
-      user: {},
       ruleForm: {
         password: "",
         passwordConfirm: "",
         oldPassword: "",
         admin: false,
-        sex: "0",
+        sex: 1,
       },
       rules: {
         password: [{ validator: validatePass, trigger: "blur" }],
@@ -102,22 +103,19 @@ export default {
   methods: {
     async init() {
       const res = await fetchUser(this.$route.params.id);
-      const user = {
-        ...res.data.user,
-        oldPassword: "",
-      };
-      this.user = user;
+      this.ruleForm = res.data.user;
+      this.ruleForm.password = "";
     },
     submitForm(formName) {
       this.$refs[formName].validate(async (valid) => {
         if (valid) {
-          const res = await updateUser(this.$route.params.id, this.user);
+          const res = await updateUser(this.$route.params.id, this.ruleForm);
           if (res.code !== 20000) {
             this.$message.error(res.message);
             return;
           }
           this.$message.success(res.message);
-          this.$router.push({ name: "userList" });
+          this.$router.push({ name: "usersList" });
         }
       });
     },

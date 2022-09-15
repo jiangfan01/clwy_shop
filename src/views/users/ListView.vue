@@ -27,7 +27,9 @@
       </el-table-column>
       <el-table-column label="性别" width="180">
         <template slot-scope="scope">
-          <span style="margin-left: 10px">{{ scope.row.sex }}</span>
+          <i
+            :class="scope.row.sex === 1 ? 'el-icon-male' : 'el-icon-female'"
+          ></i>
         </template>
       </el-table-column>
       <el-table-column label="管理员" width="180">
@@ -57,12 +59,11 @@
               >编辑</el-button
             >
           </router-link>
-          <el-button
-            size="mini"
-            type="danger"
-            @click="handleDelete(scope.$index, scope.row)"
-            >删除</el-button
-          >
+          <el-popconfirm title="确认删除？" @confirm="handleDelete(scope.row)">
+            <el-button size="mini" type="danger" slot="reference"
+              >删除</el-button
+            >
+          </el-popconfirm>
         </template>
       </el-table-column>
     </el-table>
@@ -70,7 +71,7 @@
 </template>
 
 <script>
-import { fetchUsersList, sortUser } from "@/api/user";
+import { fetchUsersList, sortUser, deleteUser } from "@/api/user";
 export default {
   data() {
     return {
@@ -93,8 +94,13 @@ export default {
     handleEdit(index, row) {
       console.log(index, row);
     },
-    handleDelete(index, row) {
-      console.log(index, row);
+    async handleDelete(row) {
+      const res = await deleteUser(row.id);
+      if (res.code !== 20000) {
+        this.$message.error(res.message);
+        return;
+      }
+      this.$message.success(res.message);
     },
     onSubmit() {
       console.log("submit!");
@@ -103,6 +109,7 @@ export default {
       const res = await sortUser(row.id);
       if (res.code !== 20000) {
         this.$message.error(res.message);
+        return;
       }
       this.$message.success(res.message);
     },

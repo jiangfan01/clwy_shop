@@ -81,6 +81,16 @@ h1 {
   margin-right: 20px;
 }
 
+.el-icon-male {
+  color: #1f99b0;
+  font-size: 20px;
+}
+
+.el-icon-female {
+  color: lightpink;
+  font-size: 20px;
+}
+
 * {
   margin: 0;
   padding: 0;
