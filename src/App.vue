@@ -1,32 +1,31 @@
 <template>
-  <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
-    <router-view />
-  </div>
+  <el-container>
+    <el-header>
+      <img
+        src="https://images.clwy.cn/common/logo.png"
+        alt="长乐未央Logo"
+        class="logo"
+      />
+      <h1>长乐未央后台管理</h1>
+    </el-header>
+    <el-container>
+      <Aside />
+      <el-container>
+        <el-main>
+          <router-view />
+        </el-main>
+        <el-footer
+          >Copyright 2013-2022 CLWY Inc. All Rights Reserved.</el-footer
+        >
+      </el-container>
+    </el-container>
+  </el-container>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import Aside from "@/components/AsideBar";
 
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
-</style>
+export default {
+  components: { Aside },
+};
+</script>

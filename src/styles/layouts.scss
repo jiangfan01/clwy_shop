@@ -1,0 +1,75 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.el-container, .el-aside, .el-aside .el-col, .el-menu {
+  height: 100%;
+}
+
+.el-header, .el-footer {
+  background-color: #e1f0f0;
+  color: #333;
+}
+
+.el-header {
+  .logo {
+    height: 40px;
+    margin-top: 10px;
+    float: left;
+  }
+
+  h1 {
+    margin: 0 0 0 20px;
+    font-size: 18px;
+    font-weight: normal;
+    float: left;
+  }
+}
+
+.el-footer {
+  text-align: center;
+}
+
+.el-aside {
+  background-color: #e1f0f0;
+  color: #333;
+}
+
+.el-main {
+  color: #333;
+  overflow: visible;
+}
+.cell .el-button{
+  margin-right: 5px;
+}
+.el-table_1_column_4 {
+  color: #1f99b0;
+  cursor: pointer;
+}
+.has-gutter .el-table_1_column_4 .cell {
+  color: #909399;
+  cursor: auto;
+}
+.el-aside{
+  overflow: hidden;
+}
+h1{
+  line-height: 60px;
+}
+.el-footer{
+  line-height: 60px;
+}
+.cell img{
+  width: 100px;
+  height: 80px;
+}
+.el-button--primary{
+  background-color: #67c23a !important;
+}
+.el-form--inline{
+  margin-top: 20px;
+}
+.el-button{
+  margin-right: 20px;
+}
