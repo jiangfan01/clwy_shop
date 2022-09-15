@@ -55,9 +55,7 @@
           <router-link
             :to="{ name: 'usersEdit', params: { id: scope.row.id } }"
           >
-            <el-button size="mini" @click="handleEdit(scope.$index, scope.row)"
-              >编辑</el-button
-            >
+            <el-button size="mini">编辑</el-button>
           </router-link>
           <el-popconfirm title="确认删除？" @confirm="handleDelete(scope.row)">
             <el-button size="mini" type="danger" slot="reference"
@@ -100,11 +98,10 @@ export default {
         this.$message.error(res.message);
         return;
       }
+      this.init();
       this.$message.success(res.message);
     },
-    onSubmit() {
-      console.log("submit!");
-    },
+    onSubmit() {},
     async toggleAdmin(row) {
       const res = await sortUser(row.id);
       if (res.code !== 20000) {
