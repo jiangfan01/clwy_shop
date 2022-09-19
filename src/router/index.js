@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import HomeView from "../views/HomeView.vue";
-import CategoryView from "../views/CategoryView.vue";
+import CategoryView from "../views/shop/ListView.vue";
 import AdListView from "../views/AdCategory/ListView.vue";
 import AdCreateView from "../views/AdCategory/AdcategoryView.vue";
 import AdEditView from "../views/AdCategory/EditView.vue";
@@ -19,6 +19,10 @@ import SettingView from "../views/setting/SettingView.vue";
 import UserListView from "../views/users/ListView.vue";
 import UserEditView from "../views/users/EditView.vue";
 import UserCreateView from "../views/users/CreateView.vue";
+
+import ShopListView from "../views/shop/ListView.vue";
+import ShopEditView from "../views/shop/EditView.vue";
+import ShopCreateView from "../views/shop/CreateView.vue";
 
 Vue.use(VueRouter);
 
@@ -117,6 +121,21 @@ const routes = [
     path: "/users/create",
     name: "usersCreate",
     component: UserCreateView,
+  },
+  {
+    path: "/shop",
+    name: "shopList",
+    component: ShopListView,
+  },
+  {
+    path: "/shop/edit/:id",
+    name: "shopEdit",
+    component: ShopEditView,
+  },
+  {
+    path: "/shop/create",
+    name: "shopCreate",
+    component: ShopCreateView,
   },
 ];
 

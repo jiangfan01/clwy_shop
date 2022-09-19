@@ -32,6 +32,20 @@
           v-model="user.passwordConfirm"
         ></el-input>
       </el-form-item>
+      <el-form-item label="头像" prop="image">
+        <el-upload
+          class="image-uploader"
+          action="http://up-z2.qiniup.com/"
+          :show-file-list="false"
+          :on-success="handleImageSuccess"
+          :before-upload="beforeImageUpload"
+          :data="uploadData"
+          name="file"
+        >
+          <img v-if="imageUrl" :src="imageUrl" class="image" />
+          <i v-else class="el-icon-plus image-uploader-icon"></i>
+        </el-upload>
+      </el-form-item>
       <el-form-item label="管理员">
         <el-switch
           v-model="user.admin"
@@ -60,6 +74,8 @@
 
 <script>
 import { fetchUser, updateUser, createUser } from "@/api/user";
+import { v4 as uuidv4 } from "uuid";
+import { fetchToken } from "@/api/upload";
 
 export default {
   props: {
@@ -88,6 +104,8 @@ export default {
     };
 
     return {
+      uploadData: { key: "", token: "" },
+      imageUrl: "",
       user: {
         username: "",
         password: "",
@@ -95,6 +113,7 @@ export default {
         passwordConfirm: "",
         admin: false,
         sex: 1,
+        avatar: "",
       },
       rules: {
         username: [
@@ -116,6 +135,7 @@ export default {
     //查询单条
     async fetchData() {
       const res = await fetchUser(this.$route.params.id);
+      this.imageUrl = res.data.user.avatar;
       const user = {
         ...res.data.user,
         password: "",
@@ -142,6 +162,31 @@ export default {
     },
     resetForm(formName) {
       this.$refs[formName].resetFields();
+    },
+    handleImageSuccess(res, file) {
+      this.imageUrl = URL.createObjectURL(file.raw);
+      this.user.avatar = `http://ria894its.hn-bkt.clouddn.com/${res.key}`;
+    },
+    async beforeImageUpload(file) {
+      const isJPG = file.type === "image/jpeg";
+      const isPNG = file.type === "image/png";
+      const isGIF = file.type === "image/gif";
+      const isLt2M = file.size / 1024 / 1024 < 2;
+
+      if (!isJPG && !isPNG && !isGIF) {
+        this.$message.error("上传头像图片只能是 jpg,png,gif 格式!");
+        return false;
+      }
+      if (!isLt2M) {
+        this.$message.error("上传头像图片大小不能超过 2MB!");
+        return false;
+      }
+      const res = await fetchToken();
+      this.uploadData.token = res.data.uploadToken;
+
+      const ext = file.type.split("/")[1];
+      this.uploadData.key = `${uuidv4()}.${ext}`;
+      console.log(this.uploadData.key);
     },
   },
 };

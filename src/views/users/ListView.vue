@@ -25,6 +25,11 @@
           <span style="margin-left: 10px">{{ scope.row.username }}</span>
         </template>
       </el-table-column>
+      <el-table-column label="头像" width="180">
+        <template slot-scope="scope">
+          <el-image :src="scope.row.avatar" class="user-avatar" />
+        </template>
+      </el-table-column>
       <el-table-column label="性别" width="180">
         <template slot-scope="scope">
           <i
