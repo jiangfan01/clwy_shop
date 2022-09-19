@@ -16,7 +16,7 @@
       </el-table-column>
       <el-table-column label="图片" width="180">
         <template slot-scope="scope">
-          <img :src="scope.row.image" alt="" />
+          <img :src="scope.row.image" alt="" v-if="scope.row.parentId !== 0" />
         </template>
       </el-table-column>
       <el-table-column label="排序" width="180">
