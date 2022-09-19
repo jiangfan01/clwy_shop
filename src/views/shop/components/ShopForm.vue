@@ -78,14 +78,13 @@ export default {
             trigger: "blur",
           },
         ],
-        // sort: [
-        //   {
-        //     required: true,
-        //     message: "请输入排序",
-        //     trigger: "blur",
-        //     type: Number,
-        //   },
-        // ],
+        sort: [
+          {
+            required: true,
+            message: "请输入排序",
+            trigger: "blur",
+          },
+        ],
       },
     };
   },
