@@ -72,27 +72,27 @@
       </el-form-item>
     </el-form>
     <el-table :data="products" style="width: 100%">
-      <el-table-column label="编号" width="180">
+      <el-table-column label="编号">
         <template slot-scope="scope">
           <span style="margin-left: 10px">{{ scope.row.id }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="缩略图" width="180">
+      <el-table-column label="缩略图">
         <template slot-scope="scope">
           <el-image :src="scope.row.image" id="pic"></el-image>
         </template>
       </el-table-column>
-      <el-table-column label="商品名" width="180">
+      <el-table-column label="商品名">
         <template slot-scope="scope">
           <span style="margin-left: 10px">{{ scope.row.name }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="单价" width="180">
+      <el-table-column label="单价">
         <template slot-scope="scope">
           <span style="margin-left: 10px">{{ scope.row.price }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="上架" width="180">
+      <el-table-column label="上架" class="switch">
         <template slot-scope="scope">
           <el-switch
             v-model="scope.row.sale"
@@ -103,7 +103,7 @@
           </el-switch>
         </template>
       </el-table-column>
-      <el-table-column label="推荐" width="180">
+      <el-table-column label="推荐" class="switch">
         <template slot-scope="scope">
           <el-switch
             v-model="scope.row.recommend"
@@ -114,7 +114,7 @@
           </el-switch>
         </template>
       </el-table-column>
-      <el-table-column label="置顶" width="180">
+      <el-table-column label="置顶" class="switch">
         <template slot-scope="scope">
           <el-switch
             v-model="scope.row.top"
@@ -125,7 +125,7 @@
           </el-switch>
         </template>
       </el-table-column>
-      <el-table-column label="新品" width="180">
+      <el-table-column label="新品" class="switch">
         <template slot-scope="scope">
           <el-switch
             v-model="scope.row.new"
@@ -136,7 +136,7 @@
           </el-switch>
         </template>
       </el-table-column>
-      <el-table-column label="热门" width="180">
+      <el-table-column label="热门" class="switch">
         <template slot-scope="scope">
           <el-switch
             v-model="scope.row.hot"
@@ -147,7 +147,7 @@
           </el-switch>
         </template>
       </el-table-column>
-      <el-table-column label="创建时间" width="180">
+      <el-table-column label="创建时间">
         <template slot-scope="scope">
           <span style="margin-left: 10px">
             {{ scope.row.createdAt | dateFormat }}</span
