@@ -110,6 +110,14 @@ h1 {
   max-width: 180px;
 }
 
+#pic {
+  max-width: 50px !important;
+}
+
+.el-button + .el-button {
+  margin-left: 0;
+}
+
 * {
   margin: 0;
   padding: 0;

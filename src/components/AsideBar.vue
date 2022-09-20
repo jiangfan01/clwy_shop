@@ -21,7 +21,7 @@
             <span>商品管理</span>
           </template>
           <el-menu-item index="/category">商品分类</el-menu-item>
-          <el-menu-item index="/articles/trash">商品</el-menu-item>
+          <el-menu-item index="/products">商品</el-menu-item>
         </el-submenu>
         <el-submenu index="/">
           <template slot="title">

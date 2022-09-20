@@ -97,3 +97,9 @@ h1{
 #ads-title{
   max-width: 180px;
 }
+#pic {
+  max-width: 50px !important;
+}
+.el-button+.el-button{
+  margin-left: 0;
+}
