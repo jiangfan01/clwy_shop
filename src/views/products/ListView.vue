@@ -197,11 +197,7 @@ export default {
     return {
       products: [],
       searchParams: { name: "", categoryId: "", currentPage: 1, pageSize: 10 },
-      pagination: {
-        currentPage: 1,
-        pageSize: 10,
-        total: 22,
-      },
+      pagination: {},
       categories: [],
     };
   },
@@ -212,6 +208,7 @@ export default {
     async init() {
       const res = await fetchProductsList(this.searchParams);
       this.products = res.data.products;
+      this.pagination = res.data.pagination;
       const test = await ShopList();
       this.categories = test.data.categories;
     },

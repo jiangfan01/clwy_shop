@@ -69,6 +69,19 @@
         </div>
       </el-card>
     </div>
+    <div class="block">
+      <span class="demonstration">完整功能</span>
+      <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        ::current-page="pagination.currentPage"
+        :page-sizes="[8, 16, 24, 32]"
+        :page-size="pagination.pageSize"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="pagination.total"
+      >
+      </el-pagination>
+    </div>
   </div>
 </template>
 <script>
@@ -84,6 +97,8 @@ export default {
         "uc-order-item-receiving",
         "uc-order-item-finish",
       ],
+      searchParams: { currentPage: 1, pageSize: 8 },
+      pagination: {},
     };
   },
   created() {
@@ -91,8 +106,17 @@ export default {
   },
   methods: {
     async init() {
-      const res = await fetchOrdersList();
+      const res = await fetchOrdersList(this.searchParams);
       this.orders = res.data.orders;
+      this.pagination = res.data.pagination;
+    },
+    handleSizeChange(val) {
+      this.searchParams.pageSize = val;
+      this.init();
+    },
+    handleCurrentChange(val) {
+      this.searchParams.currentPage = val;
+      this.init();
     },
   },
   filters: {
