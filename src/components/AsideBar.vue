@@ -35,6 +35,10 @@
           <i class="el-icon-user"></i>
           <span slot="title">用户管理</span>
         </el-menu-item>
+        <el-menu-item index="/orders">
+          <i class="el-icon-shopping-bag-1"></i>
+          <span slot="title">订单管理</span>
+        </el-menu-item>
         <el-menu-item index="/expresses">
           <i class="el-icon-ship"></i>
           <span slot="title">物流管理</span>

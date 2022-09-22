@@ -34,6 +34,8 @@ import ProductListView from "../views/products/ListView.vue";
 import ProductEditView from "../views/products/EditView.vue";
 import ProductCreateView from "../views/products/CraeteView.vue";
 
+import OrdersListView from "../views/orders/ListView.vue";
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -161,6 +163,11 @@ const routes = [
     path: "/products/create",
     name: "productsCreate",
     component: ProductCreateView,
+  },
+  {
+    path: "/orders",
+    name: "ordersList",
+    component: OrdersListView,
   },
 ];
 

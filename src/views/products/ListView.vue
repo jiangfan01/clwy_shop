@@ -32,7 +32,7 @@
           </el-option-group> </el-select
       ></el-form-item>
       <el-form-item label="上架">
-        <el-select v-model="searchParams.salf" placeholder="活动区域">
+        <el-select v-model="searchParams.sale" placeholder="活动区域">
           <el-option label="不限" value=""></el-option>
           <el-option label="是" value="true"></el-option>
           <el-option label="否" value="false"></el-option>
@@ -159,16 +159,13 @@
           <router-link
             :to="{ name: 'productsEdit', params: { id: scope.row.id } }"
           >
-            <el-button size="mini" @click="handleEdit(scope.$index, scope.row)"
-              >编辑</el-button
-            >
+            <el-button size="mini"> 编辑 </el-button>
           </router-link>
-          <el-button
-            size="mini"
-            type="danger"
-            @click="handleDelete(scope.$index, scope.row)"
-            >删除</el-button
-          >
+          <el-popconfirm title="确认删除？" @confirm="handleDelete(scope.row)">
+            <el-button size="mini" type="danger" slot="reference"
+              >删除</el-button
+            >
+          </el-popconfirm>
         </template>
       </el-table-column>
     </el-table>
@@ -188,7 +185,11 @@
   </div>
 </template>
 <script>
-import { fetchProductsList, recoverProducts } from "@/api/products";
+import {
+  fetchProductsList,
+  recoverProducts,
+  deleteProducts,
+} from "@/api/products";
 import { ShopList } from "@/api/shop";
 
 export default {
@@ -214,11 +215,14 @@ export default {
       const test = await ShopList();
       this.categories = test.data.categories;
     },
-    handleEdit(index, row) {
-      console.log(index, row);
-    },
-    handleDelete(index, row) {
-      console.log(index, row);
+    async handleDelete(row) {
+      const res = await deleteProducts(row.id);
+      if (res.code !== 20000) {
+        this.$message.error(res.message);
+        return;
+      }
+      this.$message.success(res.message);
+      this.init();
     },
     resetForm(formName) {
       this.$refs[formName].resetFields();

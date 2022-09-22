@@ -41,7 +41,7 @@
         </el-upload>
       </el-form-item>
       <el-form-item label="单价" prop="price">
-        <el-input v-model="product.price"></el-input>
+        <el-input v-model.number="product.price"></el-input>
       </el-form-item>
       <el-form-item label="上架">
         <el-switch
