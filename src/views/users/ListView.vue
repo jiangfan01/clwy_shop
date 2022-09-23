@@ -118,3 +118,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+.user-avatar {
+  border-radius: 10px;
+}
+</style>
