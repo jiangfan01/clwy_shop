@@ -35,7 +35,7 @@ import ProductEditView from "../views/products/EditView.vue";
 import ProductCreateView from "../views/products/CraeteView.vue";
 
 import OrdersListView from "../views/orders/ListView.vue";
-
+import OrdersShowView from "../views/orders/ShowView.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -168,6 +168,11 @@ const routes = [
     path: "/orders",
     name: "ordersList",
     component: OrdersListView,
+  },
+  {
+    path: "/orders/show/:id",
+    name: "ordersShow",
+    component: OrdersShowView,
   },
 ];
 

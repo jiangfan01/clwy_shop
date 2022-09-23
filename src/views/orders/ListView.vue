@@ -59,9 +59,13 @@
                   </ul>
                 </td>
                 <td class="order-actions">
-                  <el-button class="orders-button" type="success">
-                    订单详情
-                  </el-button>
+                  <router-link
+                    :to="{ name: 'ordersShow', params: { id: order.id } }"
+                  >
+                    <el-button class="orders-button" type="success">
+                      订单详情
+                    </el-button>
+                  </router-link>
                 </td>
               </tr>
             </tbody>

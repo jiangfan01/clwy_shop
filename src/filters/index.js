@@ -6,6 +6,7 @@ import moment from "moment";
  */
 export function dateFormat(value) {
   moment.locale("zh-cn");
+  if (!value) return "暂无数据";
   return moment(value).format("LL");
 }
 

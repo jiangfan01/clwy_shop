@@ -26,10 +26,11 @@ export function pickingOrders(id) {
 }
 
 //修改为发货状态
-export function shippingOrders(id) {
+export function shippingOrders(id, data) {
   return request({
     url: `/admin/orders/${id}/shipping`,
     method: "patch",
+    data,
   });
 }
 
