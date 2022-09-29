@@ -1,41 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import HomeView from "../views/HomeView.vue";
-import CategoryView from "../views/shop/ListView.vue";
 
-import AdListView from "../views/AdCategory/ListView.vue";
-import AdCreateView from "../views/AdCategory/AdcategoryView.vue";
-import AdEditView from "../views/AdCategory/EditView.vue";
-
-import ExpressesView from "../views/Expresses/ExpressesView.vue";
-import NewExpressesView from "../views/Expresses/NewExpressesView.vue";
-import EditExpressesView from "../views/Expresses/EditExpressesView.vue";
-
-import AdsView from "../views/Ads/AdsView.vue";
-import CreateAdsView from "../views/Ads/CreateAdsView.vue";
-import EditAdsView from "../views/Ads/EditAdsView.vue";
-
-import ArticlesListView from "../views/articles/ListView.vue";
-import ArticlesEditView from "../views/articles/EditView.vue";
-import ArticlesCreateView from "../views/articles/CreateView.vue";
-import TrashView from "../views/articles/TrashView.vue";
-
-import SettingView from "../views/setting/SettingView.vue";
-
-import UserListView from "../views/users/ListView.vue";
-import UserEditView from "../views/users/EditView.vue";
-import UserCreateView from "../views/users/CreateView.vue";
-
-import ShopListView from "../views/shop/ListView.vue";
-import ShopEditView from "../views/shop/EditView.vue";
-import ShopCreateView from "../views/shop/CreateView.vue";
-
-import ProductListView from "../views/products/ListView.vue";
-import ProductEditView from "../views/products/EditView.vue";
-import ProductCreateView from "../views/products/CraeteView.vue";
-
-import OrdersListView from "../views/orders/ListView.vue";
-import OrdersShowView from "../views/orders/ShowView.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -47,132 +13,122 @@ const routes = [
   {
     path: "/category",
     name: "category",
-    component: CategoryView,
+    component: () => import("../views/shop/ListView.vue"),
   },
   {
     path: "/list",
     name: "AdList",
-    component: AdListView,
+    component: () => import("../views/AdCategory/ListView.vue"),
   },
   {
     path: "/ads",
     name: "ads",
-    component: AdsView,
+    component: () => import("../views/Ads/AdsView.vue"),
   },
   {
     path: "/ads/create",
     name: "adsCreate",
-    component: CreateAdsView,
+    component: () => import("../views/Ads/AdsView.vue"),
   },
   {
     path: "/ads/edit/:id",
     name: "adsEdit",
-    component: EditAdsView,
+    component: () => import("../views/Ads/EditAdsView.vue"),
   },
   {
     path: "/create",
     name: "create",
-    component: AdCreateView,
+    component: () => import("../views/AdCategory/AdcategoryView.vue"),
   },
   {
     path: "/edit/:id",
     name: "edit",
-    component: AdEditView,
+    component: () => import("../views/AdCategory/EditView.vue"),
   },
   {
     path: "/expresses",
     name: "expresses",
-    component: ExpressesView,
+    component: () => import("../views/Expresses/ExpressesView.vue"),
   },
   {
     path: "/expresses/create",
     name: "createExpresses",
-    component: NewExpressesView,
+    component: () => import("../views/Expresses/NewExpressesView.vue"),
   },
   {
     path: "/expresses/edit/:id",
     name: "editExpresses",
-    component: EditExpressesView,
+    component: () => import("../views/Expresses/EditExpressesView.vue"),
   },
   {
     path: "/articles/list",
     name: "articlesList",
-    component: ArticlesListView,
-  },
-  {
-    path: "/articles/edit/:id",
-    name: "articlesEdit",
-    component: ArticlesEditView,
-  },
-  {
-    path: "/articles/create",
-    name: "articlesCreate",
-    component: ArticlesCreateView,
+    component: () => import("../views/articles/ListView.vue"),
   },
   {
     path: "/articles/trash",
     name: "trash",
-    component: TrashView,
+    component: () => import("../views/articles/TrashView.vue"),
   },
   {
     path: "/settings",
     name: "setting",
-    component: SettingView,
+    component: () => import("../views/setting/SettingView.vue"),
   },
   {
     path: "/users",
     name: "usersList",
-    component: UserListView,
+    component: () => import("../views/users/ListView.vue"),
   },
   {
     path: "/users/edit/:id",
     name: "usersEdit",
-    component: UserEditView,
+    component: () => import("../views/users/EditView.vue"),
   },
   {
     path: "/users/create",
     name: "usersCreate",
-    component: UserCreateView,
+    component: () => import("../views/users/CreateView.vue"),
   },
   {
     path: "/shop",
     name: "shopList",
-    component: ShopListView,
+    component: () => import("../views/shop/ListView.vue"),
   },
   {
     path: "/shop/edit/:id",
     name: "shopEdit",
-    component: ShopEditView,
+    component: () => import("../views/shop/EditView.vue"),
   },
   {
     path: "/shop/create",
     name: "shopCreate",
-    component: ShopCreateView,
+    component: () => import("../views/shop/CreateView.vue"),
   },
   {
     path: "/products",
     name: "productsList",
-    component: ProductListView,
+    component: () => import("../views/products/ListView.vue"),
   },
   {
     path: "/products/edit/:id",
     name: "productsEdit",
-    component: ProductEditView,
+    component: () => import("../views/products/EditView.vue"),
   },
   {
     path: "/products/create",
     name: "productsCreate",
-    component: ProductCreateView,
+    component: () => import("../views/products/CraeteView.vue"),
   },
   {
     path: "/orders",
     name: "ordersList",
-    component: OrdersListView,
+    component: () => import("../views/orders/ListView.vue"),
   },
   {
     path: "/orders/show/:id",
     name: "ordersShow",
-    component: OrdersShowView,
+    component: () => import("../views/orders/ShowView.vue"),
   },
 ];
 

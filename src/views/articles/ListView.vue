@@ -1,8 +1,6 @@
 <template>
   <div>
-    <router-link :to="{ name: 'articlesCreate' }">
-      <el-button type="primary" round>新增新闻</el-button>
-    </router-link>
+    <el-button type="primary" round @click="handleCreate">新增新闻</el-button>
     <el-popconfirm title="确认全部删除吗？" @confirm="multipleDelete">
       <el-button type="danger" slot="reference" round>批量删除</el-button>
     </el-popconfirm>
@@ -39,13 +37,10 @@
       </el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
-          <router-link
-            :to="{ name: 'articlesEdit', params: { id: scope.row.id } }"
-          >
-            <el-button size="mini" @click="handleEdit(scope.row)">
-              编辑
-            </el-button>
-          </router-link>
+          <el-button size="mini" @click="handleEdit(scope.row.id)">
+            编辑
+          </el-button>
+
           <el-popconfirm
             title="确认删除到回收站吗？"
             @confirm="handleDelete(scope.row)"
@@ -57,6 +52,7 @@
         </template>
       </el-table-column>
     </el-table>
+    <ArticlesDialogs ref="form" :isEdit="isEdit" />
     <div class="block">
       <el-pagination
         @size-change="handleSizeChange"
@@ -77,8 +73,11 @@ import {
   deleteArticle,
   multiple_deleteArticle,
 } from "@/api/articles";
-
+import ArticlesDialogs from "@/views/articles/components/ArticlesDialog";
 export default {
+  components: {
+    ArticlesDialogs,
+  },
   data() {
     return {
       articles: [],
@@ -93,6 +92,7 @@ export default {
         currentPage: 1,
         pageSize: 10,
       },
+      isEdit: false,
     };
   },
   created() {
@@ -104,7 +104,6 @@ export default {
       this.articles = res.data.articles;
       this.pagination = res.data.pagination;
     },
-    handleEdit() {},
     async handleDelete(row) {
       const res = await deleteArticle(row.id);
       if (res.code !== 20000) {
@@ -134,6 +133,16 @@ export default {
     handleCurrentChange(val) {
       this.searchParams.currentPage = val;
       this.init();
+    },
+    handleCreate() {
+      this.$refs.form.dialogFormVisible = true;
+      this.$refs.form.resetForm();
+      this.isEdit = false;
+    },
+    handleEdit(id) {
+      this.$refs.form.dialogFormVisible = true;
+      this.isEdit = true;
+      this.$refs.form.initForm(id);
     },
   },
 };

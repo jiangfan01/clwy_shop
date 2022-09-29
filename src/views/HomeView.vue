@@ -10,9 +10,8 @@
 </template>
 
 <script>
-import * as echarts from "echarts";
 import { statisticsArticle, statisticsSex } from "@/api/statistics";
-
+import * as echarts from "echarts";
 export default {
   name: "HomeView",
   mounted() {

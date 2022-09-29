@@ -1,8 +1,8 @@
 <template>
   <div>
-    <router-link :to="{ name: 'createExpresses' }">
-      <el-button type="primary" round>新增物流系信息</el-button>
-    </router-link>
+    <el-button type="primary" round @click="handleCreate"
+      >新增物流系信息</el-button
+    >
     <el-table :data="expresses" style="width: 100%">
       <el-table-column prop="id" label="编号" width="180"> </el-table-column>
       <el-table-column prop="name" label="名称" width="180"> </el-table-column>
@@ -24,13 +24,9 @@
       </el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
-          <router-link
-            :to="{ name: 'editExpresses', params: { id: scope.row.id } }"
-          >
-            <el-button size="mini" @click="handleEdit(scope.row)">
-              编辑
-            </el-button>
-          </router-link>
+          <el-button size="mini" @click="handleEdit(scope.row.id)">
+            编辑
+          </el-button>
           <el-popconfirm title="确认删除？" @confirm="handleDelete(scope.row)">
             <el-button size="mini" type="danger" slot="reference"
               >删除</el-button
@@ -51,6 +47,8 @@
       >
       </el-pagination>
     </div>
+    <CreateDialog ref="form" />
+    <EditDialog ref="edit" />
   </div>
 </template>
 <script>
@@ -59,7 +57,14 @@ import {
   deleteExpresses,
   sortExpresses,
 } from "@/api/experss";
+import CreateDialog from "@/views/Expresses/components/CreateDialog";
+import EditDialog from "@/views/Expresses/components/EditDialog";
+
 export default {
+  components: {
+    CreateDialog,
+    EditDialog,
+  },
   data() {
     return {
       expresses: [],
@@ -80,9 +85,7 @@ export default {
       this.expresses = res.data.expresses;
       this.pagination = res.data.pagination;
     },
-    handleEdit(row) {
-      console.log(row);
-    },
+
     async handleDelete(row) {
       const res = await deleteExpresses(row.id);
       if (res.code !== 20000) {
@@ -106,6 +109,17 @@ export default {
     handleCurrentChange(val) {
       this.searchParams.currentPage = val;
       this.init();
+    },
+    handleCreate() {
+      this.$refs.form.dialogFormVisible = true;
+      this.$nextTick(() => {
+        this.$refs.form.resetForm();
+      });
+    },
+    handleEdit(id) {
+      this.$refs.edit.dialogFormVisible = true;
+      this.isEdit = true;
+      this.$refs.edit.initEdit(id);
     },
   },
 };
