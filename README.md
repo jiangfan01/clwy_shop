@@ -2,6 +2,14 @@
 
 ## 长乐未央商城vue后台
 
+## 项目已打包上线  [长乐未央商城后台](https://admin.serein-jf.co)
+### 后台默认用户
+```
+账号:admin
+密码:123123
+```
+
+
 ## 项目安装yarn源
 ```
 yarn install

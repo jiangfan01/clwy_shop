@@ -6,13 +6,16 @@
     </el-breadcrumb>
     <div id="main" style="width: 100%; height: 500px"></div>
     <div id="sexTable" style="width: 100%; height: 500px"></div>
+    <OrderCount style="width: 100%; height: 500px" />
   </div>
 </template>
 
 <script>
 import { statisticsArticle, statisticsSex } from "@/api/statistics";
 import * as echarts from "echarts";
+import OrderCount from "@/components/echarts/OrderCount";
 export default {
+  components: { OrderCount },
   name: "HomeView",
   mounted() {
     this.countArticles();

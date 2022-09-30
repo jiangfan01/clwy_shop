@@ -42,6 +42,13 @@ export default {
   },
   created() {
     this.token = getToken();
+    this.$root.socket.on("new-order", (msg) => {
+      this.$notify({
+        title: "提醒",
+        message: msg,
+        type: "warning",
+      });
+    });
   },
   methods: {
     signOut() {

@@ -14,3 +14,11 @@ export function statisticsSex() {
     method: "get",
   });
 }
+
+// 订单统计接口
+export function fetchOrderCount() {
+  return request({
+    method: "get",
+    url: "/admin/charts/orders",
+  });
+}

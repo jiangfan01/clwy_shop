@@ -13,6 +13,7 @@
     "element-ui": "^2.15.9",
     "js-cookie": "^3.0.1",
     "moment": "^2.29.4",
+    "socket.io-client": "^4.5.2",
     "uuid": "^9.0.0",
     "vue": "^2.6.14",
     "vue-quill-editor": "^3.0.6",
