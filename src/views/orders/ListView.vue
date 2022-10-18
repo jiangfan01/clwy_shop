@@ -1,5 +1,37 @@
 <template>
   <div>
+    <div class="demo-input-suffix">
+      <el-input
+        placeholder="搜索订单号"
+        v-model="searchParams.outTradeNo"
+        class="search"
+      >
+        <i slot="prefix" class="el-input__icon el-icon-search"></i>
+      </el-input>
+      <el-select v-model="searchParams.status" placeholder="选择订单状态">
+        <el-option value="1" label="待付款"> </el-option>
+        <el-option value="2" label="待发货"> </el-option>
+        <el-option value="3" label="配货中"> </el-option>
+        <el-option value="4" label="待收货"> </el-option>
+        <el-option value="5" label="已完成"> </el-option>
+      </el-select>
+      <el-row>
+        <el-button type="success" round @click="init" class="search-button"
+          >搜索</el-button
+        >
+      </el-row>
+      <download-excel
+        class="export-excel-wrapper"
+        :data="orders"
+        :fields="json_fields"
+        name="ordersList.xls"
+      >
+        <el-button type="success" round icon="el-icon-download" class="download"
+          >导出excel表格
+        </el-button>
+      </download-excel>
+    </div>
+
     <div class="order-list-box">
       <el-card
         class="box-card uc-order-item"
@@ -93,6 +125,22 @@ import { fetchOrdersList } from "@/api/orders";
 export default {
   data() {
     return {
+      json_fields: {
+        订单编号: "id",
+        订单号: "outTradeNo",
+        订单状态: "status",
+        订单总金额: "totalPrice",
+        订单总数量: "totalNum",
+        订单创建时间: "createdAt",
+      },
+      json_meta: [
+        [
+          {
+            " key ": " charset ",
+            " value ": " utf- 8 ",
+          },
+        ],
+      ],
       orders: [],
       orderStyle: [
         "uc-order-item-pay",
@@ -101,7 +149,7 @@ export default {
         "uc-order-item-receiving",
         "uc-order-item-finish",
       ],
-      searchParams: { currentPage: 1, pageSize: 8 },
+      searchParams: { currentPage: 1, pageSize: 8, status: "", outTradeNo: "" },
       pagination: {},
     };
   },
@@ -113,6 +161,9 @@ export default {
       const res = await fetchOrdersList(this.searchParams);
       this.orders = res.data.orders;
       this.pagination = res.data.pagination;
+      if (this.searchParams.length === 0) {
+        alert("请输入搜索内容");
+      }
     },
     handleSizeChange(val) {
       this.searchParams.pageSize = val;
@@ -122,32 +173,50 @@ export default {
       this.searchParams.currentPage = val;
       this.init();
     },
+    // async searchAll() {
+    //   const res = await fetchOrdersList(this.searchParams);
+    //   this.orders = res.data.orders;
+    // },
   },
   filters: {
     ordersMode(value) {
       //switch 写法
-      let result;
-      switch (value) {
-        case 1:
-          result = "待付款";
-          break;
-        case 2:
-          result = "待发货";
-          break;
-        case 3:
-          result = "配货中";
-          break;
-        case 4:
-          result = "待收货";
-          break;
-        default:
-          result = "已完成";
-      }
-      return result;
+      // let result;
+      // switch (value) {
+      //   case 1:
+      //     result = "待付款";
+      //     break;
+      //   case 2:
+      //     result = "待发货";
+      //     break;
+      //   case 3:
+      //     result = "配货中";
+      //     break;
+      //   case 4:
+      //     result = "待收货";
+      //     break;
+      //   default:
+      //     result = "已完成";
+      // }
+      // return result;
 
-      // const mode = ["待付款", "待发货", "配货中", "待收货", "已完成"];
-      // return mode[value - 1];
+      const mode = ["待付款", "待发货", "配货中", "待收货", "已完成"];
+      return mode[value - 1];
     },
   },
 };
 </script>
+<style scoped lang="scss">
+.demo-input-suffix {
+  padding-bottom: 40px;
+  display: flex;
+  justify-content: center;
+  .search {
+    margin-right: 10px;
+    width: 50%;
+  }
+  .search-button {
+    margin-left: 20px;
+  }
+}
+</style>

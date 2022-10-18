@@ -6,10 +6,12 @@ import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
 import "@/styles/index.scss";
 import * as filters from "./filters";
+import JsonExcel from "vue-json-excel";
 import io from "socket.io-client";
 Object.keys(filters).forEach((key) => {
   Vue.filter(key, filters[key]);
 });
+Vue.component("downloadExcel", JsonExcel);
 Vue.config.productionTip = false;
 Vue.use(ElementUI);
 
